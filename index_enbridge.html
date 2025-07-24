@@ -1,0 +1,26 @@
+<script>
+let viz;
+
+function loadDashboard(viewName, btn) {
+  document.querySelectorAll('.tabs button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  const containerDiv = document.getElementById("tableauViz");
+  
+  // Tableau Cloud embed URL
+  const url = `https://us-east-1.online.tableau.com/t/astar_analytics/views/ASTAR_Enbridge/${viewName}?:embed=yes&:showVizHome=no&:toolbar=no&:tabs=no`;
+
+  if (viz) viz.dispose();
+
+  const options = {
+    hideTabs: true,
+    width: "1000px",
+    height: "800px"
+  };
+
+  viz = new tableau.Viz(containerDiv, url, options);
+}
+
+// Load the default tab on page load
+loadDashboard('Dashboard1', document.querySelector('.tabs button.active'));
+</script>
